@@ -45,4 +45,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contact::class);
     }
+
+    /**
+     * Search user contact.
+     * 
+     * @param $q
+     * @return mixed
+     */
+    public function searchContacts($q)
+    {
+        return $this->contacts()->where('name', 'LIKE', "%$q%")
+            ->orWhere('phone', 'LIKE', "%$q%")
+            ->orWhere('notes', 'LIKE', "%$q%")
+            ->orWhere('updated_at', 'LIKE', "%$q%")
+            ->paginate(10);
+    }
 }

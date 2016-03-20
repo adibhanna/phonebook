@@ -3,7 +3,6 @@
 window.$ = window.jQuery = require('jquery')
 
 require('bootstrap-sass');
-// var bootbox = require('bootbox')
 var Vue = require('vue');
 // Vue.use(require('vue-resource'));
 

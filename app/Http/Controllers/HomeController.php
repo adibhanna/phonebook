@@ -41,12 +41,7 @@ class HomeController extends Controller
         $search = Input::get('q');
 
         if(!is_null($search)) {
-            $contacts = $this->authUser->contacts()
-                ->where('name', 'LIKE', "%$search%")
-                ->orWhere('phone', 'LIKE', "%$search%")
-                ->orWhere('notes', 'LIKE', "%$search%")
-                ->orWhere('updated_at', 'LIKE', "%$search%")
-                ->paginate(10);
+            $contacts = $this->authUser->searchContacts($search);
         } else {
             $contacts = $this->authUser->contacts()->latest()->paginate(10);
         }
