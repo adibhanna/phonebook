@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace PhoneBook\Events;
 
 abstract class Event
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace PhoneBook\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;
@@ -19,7 +19,7 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         AuthorizationException::class,
         HttpException::class,
-        ModelNotFoundException::class,
+//        ModelNotFoundException::class,
         ValidationException::class,
     ];
 
@@ -45,6 +45,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof ModelNotFoundException) {
+            return response('Data not found.', 404);
+        }
+
         return parent::render($request, $e);
     }
 }

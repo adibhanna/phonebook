@@ -23,14 +23,15 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Phone Book
+                    <i class="glyphicon glyphicon-phone"></i> Phone Book
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -56,6 +57,9 @@
     </nav>
 
     {{-- The main contents --}}
+    {{--<div class="col-md-8 col-md-offset-2">--}}
+        {{--@include('layouts.alert')--}}
+    {{--</div>--}}
     @yield('content')
 
     <script src="{{ asset('js/app.js') }}"></script>
