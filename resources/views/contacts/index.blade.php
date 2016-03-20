@@ -43,10 +43,11 @@
                     @endif
                     <div class="list-group">
                         @foreach($contacts as $contact)
+                            @if($contact->user->id == Auth::user()->id)
                             <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">
                                     {{ucwords($contact->name)}}
-                                    <small class="pull-right">{{ $contact->updated_at->format('Y-m-d') }}</small>
+                                    <small class="pull-right">{{ $contact->created_at->format('Y-m-d') }}</small>
                                 </h4>
                                 <div class="list-group-item-text">
                                     <h5>Phone:
@@ -67,11 +68,11 @@
                                                     <i class="glyphicon glyphicon-trash"></i>
                                                 </button>
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>
                             </a>
+                            @endif
                         @endforeach
                     </div>
                 </div>

@@ -22,7 +22,7 @@ class Contact extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'phone', 'notes'];
+    protected $fillable = ['name', 'phone', 'notes', 'user_id'];
 
     /**
      * A contact belongs to a user.
@@ -31,6 +31,6 @@ class Contact extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

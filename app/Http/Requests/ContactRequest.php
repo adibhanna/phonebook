@@ -25,7 +25,7 @@ class ContactRequest extends Request
     {
         return [
             'name' => 'required|min:3',
-            'phone' => 'required'
+            'phone' => 'required|numeric'
         ];
     }
 }

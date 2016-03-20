@@ -3,9 +3,11 @@
 namespace PhoneBook\Http\Controllers;
 
 use Auth;
-use Illuminate\Support\Facades\Input;
+use PhoneBook\Contact;
+use PhoneBook\Repositories\ContactsRepository;
 use PhoneBook\User;
 use PhoneBook\Http\Requests;
+use Illuminate\Support\Facades\Input;
 use PhoneBook\Http\Requests\ContactRequest;
 
 /**
@@ -22,13 +24,20 @@ class HomeController extends Controller
     protected $authUser;
 
     /**
-     * Create a new controller instance.
+     * @var ContactsRepository
      */
-    public function __construct()
+    protected $contactsRepository;
+
+    /**
+     * Create a new controller instance.
+     * @param ContactsRepository $contactsRepository
+     */
+    public function __construct(ContactsRepository $contactsRepository)
     {
         $this->middleware('auth');
 
         $this->authUser = Auth::user();
+        $this->contactsRepository = $contactsRepository;
     }
 
     /**
@@ -40,7 +49,7 @@ class HomeController extends Controller
     {
         $search = Input::get('q');
 
-        if(!is_null($search)) {
+        if(!is_null($search) && $search != ''){
             $contacts = $this->authUser->searchContacts($search);
         } else {
             $contacts = $this->authUser->contacts()->latest()->paginate(10);
