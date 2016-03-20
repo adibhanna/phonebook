@@ -3,8 +3,6 @@
 namespace PhoneBook\Http\Controllers;
 
 use Auth;
-use PhoneBook\Contact;
-use PhoneBook\Repositories\ContactsRepository;
 use PhoneBook\User;
 use PhoneBook\Http\Requests;
 use Illuminate\Support\Facades\Input;
@@ -24,20 +22,13 @@ class HomeController extends Controller
     protected $authUser;
 
     /**
-     * @var ContactsRepository
-     */
-    protected $contactsRepository;
-
-    /**
      * Create a new controller instance.
-     * @param ContactsRepository $contactsRepository
      */
-    public function __construct(ContactsRepository $contactsRepository)
+    public function __construct()
     {
         $this->middleware('auth');
 
         $this->authUser = Auth::user();
-        $this->contactsRepository = $contactsRepository;
     }
 
     /**
