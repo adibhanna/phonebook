@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'adibhanna-259809@inbox.mailtrap.io', 'name' => 'adib hanna'],
 
     /*
     |--------------------------------------------------------------------------
