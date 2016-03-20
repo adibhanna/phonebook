@@ -2,7 +2,6 @@
 
 namespace PhoneBook\Repositories;
 
-use Illuminate\Support\Facades\DB;
 use PhoneBook\Contact;
 
 /**
