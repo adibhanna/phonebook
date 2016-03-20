@@ -5,6 +5,10 @@ namespace PhoneBook\Repositories;
 use Illuminate\Support\Facades\DB;
 use PhoneBook\Contact;
 
+/**
+ * Class ContactsRepository
+ * @package PhoneBook\Repositories
+ */
 class ContactsRepository
 {
     /**
@@ -12,11 +16,22 @@ class ContactsRepository
      */
     protected $contact;
 
+    /**
+     * ContactsRepository constructor.
+     * @param Contact $contact
+     */
     public function __construct(Contact $contact)
     {
         $this->contact = $contact;
     }
 
+    /**
+     * Search Contacts.
+     * 
+     * @param $user
+     * @param $q
+     * @return mixed
+     */
     public function search($user, $q)
     {
         return $user->contacts()
