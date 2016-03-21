@@ -10,12 +10,21 @@
         <div class="row">
             <div class="col-md-4">
                 <form v-on:submit.prevent="addContact">
+
+                    <span class="help-block" v-show="!nameIsValid">
+                        <strong>The name field is required</strong>
+                    </span>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Name" name="name" v-model="name">
                     </div>
+
+                    <span class="help-block" v-if="!phoneIsValid">
+                        <strong>The Phone field is required</strong>
+                    </span>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Phone" name="phone" v-model="phone">
                     </div>
+
                     <div class="form-group">
                         <textarea class="form-control" name="notes" rows="2" placeholder="Additional Notes" v-model="notes"></textarea>
                     </div>
@@ -34,7 +43,7 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item" v-for="contact in contacts">
                             <h4 class="list-group-item-heading">
-                                @{{contact.name}} - userID: @{{ contact.user_id }}
+                                @{{contact.name}}
                                 <small class="pull-right">@{{ contact.created_at }}</small>
                             </h4>
                             <div class="list-group-item-text">
@@ -47,7 +56,7 @@
                                         <button class="btn btn-sm btn-primary">
                                             <i class="glyphicon glyphicon-edit"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-danger" type="submit">
+                                        <button class="btn btn-sm btn-danger" @click="removeContact(contact)">
                                             <i class="glyphicon glyphicon-trash"></i>
                                         </button>
                                     </div>

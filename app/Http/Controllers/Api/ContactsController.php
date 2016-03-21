@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use PhoneBook\Http\Controllers\Controller;
 use PhoneBook\Http\Requests\ContactRequest;
 
+/**
+ * Class ContactsController
+ * @package PhoneBook\Http\Controllers\Api
+ */
 class ContactsController extends Controller
 {
     /**
@@ -26,14 +30,44 @@ class ContactsController extends Controller
         $this->authUser = Auth::user();
     }
 
+    /**
+     * List the contacts.
+     *
+     * @return \Illuminate\Pagination\Paginator
+     */
     public function listing()
     {
-        return $this->authUser->contacts()->latest()->paginate(10);
+        return $this->authUser->contacts()->paginate(10);
     }
 
-    public function store(Request $request)
+    /**
+     * Store a new contact.
+     *
+     * @param ContactRequest $request
+     *
+     * @return mixed
+     */
+    public function store(ContactRequest $request)
     {
-        return $request->get('data');
         return $this->authUser->contacts()->create($request->all());
+    }
+
+    /**
+     * Delete a contact.
+     *
+     * @param $id
+     *
+     * @return json
+     */
+    public function delete($id)
+    {
+        $contact = $this->authUser->contacts()->findOrFail($id);
+
+        if ($contact->delete()) {
+            return response('Successfully deleted the contact', 200);
+        }
+
+        return response('Could not delete the contact.', 401);
+
     }
 }

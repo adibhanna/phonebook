@@ -23549,12 +23549,16 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $("meta[name=token]").attr("value");
 
 new Vue({
     el: "#spaApp",
+
     data: {
         contacts: [],
         name: '',
         phone: '',
-        notes: ''
+        notes: '',
+        nameIsValid: true,
+        phoneIsValid: true
     },
+
     ready: function ready() {
         this.$http({ url: '/api/contacts', method: 'GET' }).then(function (response) {
             this.$set('contacts', response.data.data);
@@ -23566,18 +23570,58 @@ new Vue({
 
     methods: {
         addContact: function addContact() {
-            var data = {
-                name: this.name,
-                phone: this.phone,
-                notes: this.notes
-            };
+            if (this.validateName() && !this.validatePhone()) {
+                this.nameIsValid = true;this.phoneIsValid = false;
+            } else if (!this.validateName() && this.validatePhone()) {
+                this.nameIsValid = false;this.phoneIsValid = true;
+            } else if (!this.validateName() && !this.validatePhone()) {
+                this.nameIsValid = false;this.phoneIsValid = false;
+            } else if (this.validateName() && this.validatePhone()) {
 
-            this.$http({ url: '/api/contacts', method: 'POST' }, data).then(function (response) {
-                console.log(response);
-                // this.contacts.push(response.data.data);
+                var data = {
+                    name: this.name,
+                    phone: this.phone,
+                    notes: this.notes
+                };
+
+                this.$http.post('/api/contacts', data, function (data) {
+                    this.contacts.push(data);
+                    this.clearFields();
+                    this.hideValidationMessages();
+                }).catch(function (data) {
+                    console.log('Something wrong happened while fetching the contacts.');
+                });
+            }
+        },
+        removeContact: function removeContact(contact) {
+            this.$http({ url: '/api/contacts/' + contact.id, method: 'DELETE' }).then(function (response) {
+                this.contacts.$remove(contact);
             }, function (response) {
-                console.log('Something wrong happened while fetching the contacts.');
+                console.log('Something wrong happened while deleting the contact.');
             });
+        },
+        validateName: function validateName() {
+            if (this.name == '') {
+                return false;
+            }
+
+            return true;
+        },
+        validatePhone: function validatePhone() {
+            if (this.phone == '') {
+                return false;
+            }
+
+            return true;
+        },
+        clearFields: function clearFields() {
+            this.name = '';
+            this.phone = '';
+            this.notes = '';
+        },
+        hideValidationMessages: function hideValidationMessages() {
+            this.nameIsValid = true;
+            this.phoneIsValid = true;
         }
     }
 });
