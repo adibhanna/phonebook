@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "10a2871f1b45c8dccd1e8dc8f6a2e48f",
-    "content-hash": "8b1485987e7c5949da82435d403e52e8",
+    "hash": "92666b96c6ca082378a44b75c19b31b5",
+    "content-hash": "032a51c68f66cf4c0c7b1b1e44f79898",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -739,16 +739,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.3.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "ff76e1a660669bb56ba74ba0583fd8d41417bf39"
+                "reference": "c7e26a21ba357863de030f0b9e701c7d04593774"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/ff76e1a660669bb56ba74ba0583fd8d41417bf39",
-                "reference": "ff76e1a660669bb56ba74ba0583fd8d41417bf39",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c7e26a21ba357863de030f0b9e701c7d04593774",
+                "reference": "c7e26a21ba357863de030f0b9e701c7d04593774",
                 "shasum": ""
             },
             "require": {
@@ -783,7 +783,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-03-17 16:11:57"
+            "time": "2016-03-18 20:34:03"
         },
         {
             "name": "psr/log",
@@ -1725,6 +1725,64 @@
                 "dump"
             ],
             "time": "2016-02-13 09:23:44"
+        },
+        {
+            "name": "vinelab/api-manager",
+            "version": "v0.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vinelab/api-manager.git",
+                "reference": "c48576e47db9863fca4c634df1ff7558957c90f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vinelab/api-manager/zipball/c48576e47db9863fca4c634df1ff7558957c90f5",
+                "reference": "c48576e47db9863fca4c634df1ff7558957c90f5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.*",
+                "illuminate/http": "5.*",
+                "illuminate/routing": "5.*",
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/pagination": "5.*",
+                "mockery/mockery": "0.9.0",
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "tests/Vinelab/TestCase.php"
+                ],
+                "psr-0": {
+                    "Vinelab\\Api\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abed Halawi",
+                    "email": "abed.halawi@vinelab.com"
+                },
+                {
+                    "name": "Mahmoud Zalt",
+                    "email": "mahmoud@vinelab.com"
+                }
+            ],
+            "description": "Laravel API Manager Package - beatify and unify your responses with the least effort possible.",
+            "keywords": [
+                "api",
+                "laravel",
+                "package",
+                "response"
+            ],
+            "time": "2015-12-11 11:58:33"
         },
         {
             "name": "vlucas/phpdotenv",
