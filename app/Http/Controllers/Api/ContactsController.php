@@ -40,6 +40,17 @@ class ContactsController extends Controller
         return $this->authUser->contacts()->paginate(10);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('q');
+
+        if(is_null($search)) {
+            return $this->authUser->contacts()->paginate(10);
+        } else {
+            return $this->authUser->searchContacts($search);
+        }
+    }
+
     /**
      * Store a new contact.
      *
@@ -54,7 +65,7 @@ class ContactsController extends Controller
 
     /**
      * Update the contact.
-     * 
+     *
      * @param $id
      * @param ContactRequest $request
      * @return mixed
