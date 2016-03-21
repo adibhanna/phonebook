@@ -23637,11 +23637,23 @@ new Vue({
             });
         },
         search: function search() {
-            this.$http({ url: '/api/contacts/search?q=' + this.searchQuery, method: 'GET' }).then(function (response) {
-                this.$set('contacts', response.data.data);
-            }, function (response) {
-                console.log('Something wrong happened while fetching the contacts.');
-            });
+            this.searchQuery = this.searchQuery == null ? '' : this.searchQuery.trim();
+            if (this.searchQuery) {
+                this.$http({
+                    url: '/api/contacts/search?q=' + this.searchQuery,
+                    method: 'GET'
+                }).then(function (response) {
+                    this.$set('contacts', response.data.data);
+                }, function (response) {
+                    console.log('Something wrong happened while fetching the contacts.');
+                });
+            } else {
+                this.$http({ url: '/api/contacts', method: 'GET' }).then(function (response) {
+                    this.$set('contacts', response.data.data);
+                }, function (response) {
+                    console.log('Something wrong happened while fetching the contacts.');
+                });
+            }
         },
         validateName: function validateName() {
             if (this.name == '') {
