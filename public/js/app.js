@@ -23556,7 +23556,9 @@ new Vue({
         phone: '',
         notes: '',
         nameIsValid: true,
-        phoneIsValid: true
+        phoneIsValid: true,
+        updating: false,
+        updateId: null
     },
 
     ready: function ready() {
@@ -23585,6 +23587,39 @@ new Vue({
                 };
 
                 this.$http.post('/api/contacts', data, function (data) {
+                    this.contacts.push(data);
+                    this.clearFields();
+                    this.hideValidationMessages();
+                }).catch(function (data) {
+                    console.log('Something wrong happened while adding the contacts.');
+                });
+            }
+        },
+        editContact: function editContact(contact) {
+            this.updating = true;
+            this.updateId = contact.id;
+            this.name = contact.name;
+            this.phone = contact.phone;
+            this.notes = contact.notes;
+
+            this.contacts.$remove(contact);
+        },
+        updateContact: function updateContact() {
+            if (this.validateName() && !this.validatePhone()) {
+                this.nameIsValid = true;this.phoneIsValid = false;
+            } else if (!this.validateName() && this.validatePhone()) {
+                this.nameIsValid = false;this.phoneIsValid = true;
+            } else if (!this.validateName() && !this.validatePhone()) {
+                this.nameIsValid = false;this.phoneIsValid = false;
+            } else if (this.validateName() && this.validatePhone()) {
+
+                var data = {
+                    name: this.name,
+                    phone: this.phone,
+                    notes: this.notes
+                };
+
+                this.$http.put('/api/contacts/' + this.updateId + '/update', data, function (data) {
                     this.contacts.push(data);
                     this.clearFields();
                     this.hideValidationMessages();

@@ -9,8 +9,7 @@
 
         <div class="row">
             <div class="col-md-4">
-                <form v-on:submit.prevent="addContact">
-
+                <form @submit.prevent="addContact" v-if="! updating">
                     <span class="help-block" v-show="!nameIsValid">
                         <strong>The name field is required</strong>
                     </span>
@@ -32,6 +31,30 @@
                         <i class="glyphicon glyphicon-plus"></i> Save
                     </button>
                 </form>
+
+                <form @submit.prevent="updateContact" v-if="updating">
+                    <span class="help-block" v-show="!nameIsValid">
+                        <strong>The name field is required</strong>
+                    </span>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name" name="name" v-model="name">
+                    </div>
+
+                    <span class="help-block" v-if="!phoneIsValid">
+                        <strong>The Phone field is required</strong>
+                    </span>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Phone" name="phone" v-model="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" name="notes" rows="2" placeholder="Additional Notes" v-model="notes"></textarea>
+                    </div>
+                    <button class="btn btn-default btn-block" type="submit">
+                        <i class="glyphicon glyphicon-plus"></i> Save
+                    </button>
+                </form>
+
             </div>
             <div class="col-md-8">
                 <div class="form-group">
@@ -53,7 +76,7 @@
                                 <span>@{{ contact.notes }}</span>
                                 <div class="row">
                                     <div class="pull-right" style="margin-right: 5px">
-                                        <button class="btn btn-sm btn-primary">
+                                        <button class="btn btn-sm btn-primary" @click="editContact(contact)">
                                             <i class="glyphicon glyphicon-edit"></i>
                                         </button>
                                         <button class="btn btn-sm btn-danger" @click="removeContact(contact)">

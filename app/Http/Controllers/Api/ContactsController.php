@@ -53,6 +53,22 @@ class ContactsController extends Controller
     }
 
     /**
+     * Update the contact.
+     * 
+     * @param $id
+     * @param ContactRequest $request
+     * @return mixed
+     */
+    public function update($id, ContactRequest $request)
+    {
+        $contact = $this->authUser->contacts()->findOrFail($id);
+
+        $contact->update($request->all());
+
+        return $contact;
+    }
+
+    /**
      * Delete a contact.
      *
      * @param $id

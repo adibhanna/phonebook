@@ -17,7 +17,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/spa', 'PagesController@index');
     Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
         Route::get('/contacts', 'ContactsController@listing');
-        Route::post('/contacts', 'ContactsController@store');//not done
+        Route::post('/contacts', 'ContactsController@store');
+        Route::put('/contacts/{id}/update', 'ContactsController@update');
         Route::delete('/contacts/{id}', 'ContactsController@delete');
     });
 });
