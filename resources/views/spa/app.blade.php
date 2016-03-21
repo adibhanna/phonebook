@@ -59,7 +59,12 @@
             <div class="col-md-8">
                 <div class="form-group">
                     <form action="#">
-                        <input type="search" class="form-control input-lg" name="q" placeholder="Search..." autofocus>
+                        <input type="search"
+                               class="form-control input-lg"
+                               placeholder="Search..."
+                               autofocus
+                               v-model="searchQuery"
+                               @keyup.enter.prevent="search">
                     </form>
                 </div>
                 <div class="form-group">

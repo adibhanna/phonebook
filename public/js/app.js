@@ -23558,7 +23558,8 @@ new Vue({
         nameIsValid: true,
         phoneIsValid: true,
         updating: false,
-        updateId: null
+        updateId: null,
+        searchQuery: null
     },
 
     ready: function ready() {
@@ -23633,6 +23634,13 @@ new Vue({
                 this.contacts.$remove(contact);
             }, function (response) {
                 console.log('Something wrong happened while deleting the contact.');
+            });
+        },
+        search: function search() {
+            this.$http({ url: '/api/contacts/search?q=' + this.searchQuery, method: 'GET' }).then(function (response) {
+                this.$set('contacts', response.data.data);
+            }, function (response) {
+                console.log('Something wrong happened while fetching the contacts.');
             });
         },
         validateName: function validateName() {
