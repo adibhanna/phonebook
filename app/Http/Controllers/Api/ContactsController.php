@@ -44,9 +44,7 @@ class ContactsController extends Controller
     {
         $search = $request->get('q');
 
-        if(is_null($search)) {
-            return $this->authUser->contacts()->paginate(10);
-        } else {
+        if($search){
             return $this->authUser->searchContacts($search);
         }
     }
