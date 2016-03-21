@@ -93,6 +93,16 @@
                         </a>
                     </div>
                 </div>
+                <nav>
+                    <ul class="pager">
+                        <li v-show="pagination.previous" class="previous">
+                            <a @click="paginate('previous')" class="page-scroll" href="#"><< Previous</a>
+                        </li>
+                        <li v-show="pagination.next" class="next">
+                            <a @click="paginate('next')" class="page-scroll" href="#">Next >></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

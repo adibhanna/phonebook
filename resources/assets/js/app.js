@@ -20,18 +20,44 @@ new Vue({
         phoneIsValid: true,
         updating: false,
         updateId: null,
-        searchQuery: null
+        searchQuery: null,
+
+        pagination: {
+            page: 1,
+            previous: false,
+            next: false
+        },
+
     },
 
     ready() {
-        this.$http({url: '/api/contacts', method: 'GET'}).then(function (response) {
+        this.$http({url: '/api/contacts', method: 'GET'}, {page: this.pagination.page}).then(function (response) {
             this.$set('contacts', response.data.data);
+            this.pagination.previous = response.data.prev_page_url;
+            this.pagination.next = response.data.next_page_url;
         }, function (response) {
             console.log('Something wrong happened while fetching the contacts.');
         });
     },
 
     methods: {
+        paginate(direction) {
+            if (direction === 'previous') {
+                --this.pagination.page;
+            }
+            else if (direction === 'next') {
+                ++this.pagination.page;
+            }
+            this.$http({url: '/api/contacts?page='+this.pagination.page, method: 'GET'}).then(function (response) {
+                this.$set('contacts', response.data.data);
+                this.pagination.previous = response.data.prev_page_url;
+                this.pagination.next = response.data.next_page_url;
+            }, function (response) {
+                console.log('Something wrong happened while fetching the contacts.');
+            });
+
+        },
+
         addContact() {
             if(this.validateName() && !this.validatePhone()) {
                 this.nameIsValid = true; this.phoneIsValid = false;

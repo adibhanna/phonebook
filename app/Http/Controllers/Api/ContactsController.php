@@ -40,6 +40,12 @@ class ContactsController extends Controller
         return $this->authUser->contacts()->paginate(10);
     }
 
+    /**
+     * Search contact.
+     * 
+     * @param Request $request
+     * @return mixed
+     */
     public function search(Request $request)
     {
         $search = $request->get('q');
