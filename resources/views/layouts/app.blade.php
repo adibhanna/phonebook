@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @yield('head')
     <title>Phone Book</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -30,8 +31,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li>
-                    </li>
+                    <li><a href="{{ url('/spa') }}">SPA</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -57,9 +57,6 @@
     </nav>
 
     {{-- The main contents --}}
-    {{--<div class="col-md-8 col-md-offset-2">--}}
-        {{--@include('layouts.alert')--}}
-    {{--</div>--}}
     @yield('content')
 
     <script src="{{ asset('js/app.js') }}"></script>
